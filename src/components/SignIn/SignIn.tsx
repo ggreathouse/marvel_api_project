@@ -13,11 +13,14 @@ import {
     AlertTitle,
     CircularProgress,
     Grid,
-    CssBaseline
+    CssBaseline,
+    Box,
+    BoxProps
 } from '@mui/material';
+import { styled } from '@mui/system';
 import {useNavigate} from 'react-router-dom';
 import { Input } from '../sharedComponents';
-import avengers_image from '../../assets/Images/marvel-avengers.jpeg'
+import avengers_image from '../../assets/Images/marvel-avengers2.jpeg'
 
 const signinStyles = {
     googleButton:{
@@ -55,6 +58,14 @@ const signinStyles = {
         backgroundColor: '#4caf50'
     }
 }
+function Item(props: BoxProps) {
+    const { sx, ...other } = props;
+    return (
+      <Box
+        {...other}
+      />
+    );
+  }
 
 // Functional components to be used inside of SignIn Component
 const Alert = (props:AlertProps) =>{
@@ -98,6 +109,16 @@ const GoogleButton = (props:buttonProps) =>{
     }
 }
 
+const SignInImage = styled(Item)({
+    backgroundImage: `url(${avengers_image})`,
+    width: 400,
+    height: 711,
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    
+})
+
 
 export const SignIn = () => {
     const [open, setOpen] = useState(false);
@@ -112,6 +133,17 @@ export const SignIn = () => {
     }
 
     return (
+    <div style={{ width: '100%' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          
+          bgcolor: 'background.paper',
+          borderRadius: 1,
+        }}
+      >
+        <SignInImage />
         <Container maxWidth='sm' sx={signinStyles.containerStyle}>
            <Typography sx={signinStyles.typographyStyle}>
                Sign In Below
@@ -135,6 +167,10 @@ export const SignIn = () => {
                </Alert>
            </Snackbar>
         </Container>
-       
-    )
+      </Box>
+      
+    </div>
+  );
 }
+
+    
